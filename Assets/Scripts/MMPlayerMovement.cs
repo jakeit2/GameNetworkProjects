@@ -6,6 +6,7 @@ using MLAPI;
 public class MMPlayerMovement : NetworkBehaviour
 {
     public float movemenetSpeed = 5f;
+    public float rotationSpeed = 100f;
     public Transform camT;
     CharacterController mpCharController;
     
@@ -13,7 +14,7 @@ public class MMPlayerMovement : NetworkBehaviour
     void Start()
     {
         mpCharController = GetComponent<CharacterController>();
-        if(IsLocalPlayer)
+        if(IsOwner)
         {
             GetComponent<MeshRenderer>().material.color = Color.red;
         }
@@ -21,7 +22,7 @@ public class MMPlayerMovement : NetworkBehaviour
         {
             GetComponent<MeshRenderer>().material.color = Color.blue;
         }
-        if(!IsLocalPlayer)
+        if(!IsOwner)
         {
             camT.GetComponent<Camera>().enabled = false;
         }
@@ -30,7 +31,7 @@ public class MMPlayerMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsLocalPlayer)
+        if(IsOwner)
         {
             MPMovePlayer();
         }
@@ -39,7 +40,8 @@ public class MMPlayerMovement : NetworkBehaviour
 
     void MPMovePlayer()
     {
-        Vector3 moveVect = new Vector3(Input.GetAxis("Horizontal"), 0 , Input.GetAxis("Vertical"));
-        mpCharController.SimpleMove(moveVect * movemenetSpeed);
+        transform.Rotate(0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime, 0);
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        mpCharController.SimpleMove(forward * movemenetSpeed * Input.GetAxis("Vertical"));
     }
 }
