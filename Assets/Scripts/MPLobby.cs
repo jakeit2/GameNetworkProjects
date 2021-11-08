@@ -65,11 +65,11 @@ public class MPLobby : NetworkBehaviour
  
         }
 
-        //if(IsHost)
-        //{
-       //    startGameButton.gameObject.SetActive(true);
-        //   startGameButton.interactable = CheckEveryoneReady();
-        //}
+        if(IsHost)
+        {
+           startGameButton.gameObject.SetActive(true);
+           startGameButton.interactable = CheckEveryoneReady();
+        }
     }
 
     public void StartGame()

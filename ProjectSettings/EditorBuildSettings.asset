@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/3rdPerson+Fly/Scenes/3rdPerson+Fly.unity
-    guid: edce6a3cd6b78e7459bd2864b9295f8c
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/LobbyArea.unity
+    guid: e5fccc0843f90e04a997064af0352cb1
+  - enabled: 1
+    path: Assets/Scenes/GameWorld.unity
+    guid: 9fb20b56a4fd6724c8d78184356bc7b1
   m_configObjects: {}
