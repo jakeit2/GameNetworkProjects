@@ -12,6 +12,10 @@ public class MP_ChatUI : NetworkBehaviour
 {
     public Text chatText = null;
     public InputField chatInput = null;
+    public GameObject scorecardPanel;
+    public GameObject chatUIPanel;
+    public Text scoreplayerName;
+    public Text scorekills;
 
     NetworkVariableString messages = new NetworkVariableString("Temp");
 
@@ -29,6 +33,28 @@ public class MP_ChatUI : NetworkBehaviour
                playerName = player.networkPlayerName;
            }
        }
+    }
+
+    private void Update()
+    {
+        if (IsOwner)
+        {
+            updateUIScoreServerRpc();
+            if(Input.GetKeyDown(KeyCode.U))
+            {
+                scorecardPanel.SetActive(true);  
+            }
+            else if(Input.GetKeyDown(KeyCode.I))
+            {
+                scorecardPanel.SetActive(false);
+                chatUIPanel.SetActive(false);
+            }
+            else if(Input.GetKeyDown(KeyCode.E))
+            {
+                chatUIPanel.SetActive(true);
+            }
+        }
+        
     }
 
     public void handleSend()
@@ -65,5 +91,43 @@ public class MP_ChatUI : NetworkBehaviour
         messages.Value += playerName + ":" + text + "\n"; 
     }
 
+    [ServerRpc]
 
+    public void updateUIScoreServerRpc(ServerRpcParams svrParam = default)
+    {
+        clearUIScoreClientRpc();
+        GameObject[] currentPlayers = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject playerObj in currentPlayers)
+        {
+            foreach(PlayerInfo playerInfo in chatPlayers)
+            {
+                if(playerObj.GetComponent<NetworkObject>().OwnerClientId == playerInfo.networkClientID)
+                {
+                    updateUIScoreClientRpc(playerInfo.networkPlayerName, playerObj.GetComponent<PlayerStats>().kills.Value);
+                }
+            }
+        }
+    }
+
+    [ClientRpc]
+
+    private void clearUIScoreClientRpc()
+    {
+        if(IsOwner)
+        {
+            scoreplayerName.text = "";
+            scorekills.text = "";
+        }
+    }
+
+    [ClientRpc]
+
+    private void updateUIScoreClientRpc(string networkPlayerName, int kills)
+    {
+        if (IsOwner)
+        {
+            scoreplayerName.text += networkPlayerName + "\n";
+            scorekills.text += kills + "\n";
+        }
+    }
 }

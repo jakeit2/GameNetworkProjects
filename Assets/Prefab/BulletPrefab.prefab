@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 927540816519557849}
   - component: {fileID: 927540816519557846}
   - component: {fileID: 927540816519557853}
+  - component: {fileID: 484703437257052625}
   - component: {fileID: 927540816519557850}
   - component: {fileID: 5072669307572655382}
   - component: {fileID: 2044518282111657966}
@@ -114,6 +115,19 @@ MonoBehaviour:
   PrefabHashGenerator: BulletPrefab
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
+--- !u!114 &484703437257052625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927540816519557847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c679d42cd596644cbaed7929096cb8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerPlayerId: 0
 --- !u!114 &927540816519557850
 MonoBehaviour:
   m_ObjectHideFlags: 0
