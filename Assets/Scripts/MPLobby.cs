@@ -17,6 +17,8 @@ public class MPLobby : NetworkBehaviour
     private NetworkList<PlayerInfo> newPlayers = new NetworkList<PlayerInfo>();
 
     [SerializeField] private GameObject chatPrefab;
+    [SerializeField] private GameObject objectivePrefab;
+    [SerializeField] private GameObject timeLimitPrefab;
     void Start()
     {
         if(IsOwner)
@@ -123,6 +125,14 @@ public class MPLobby : NetworkBehaviour
             chatUISpawn.GetComponent<NetworkObject>().SpawnWithOwnership(tmpClient.networkClientID);
             chatUISpawn.GetComponent<MP_ChatUI>().chatPlayers = newPlayers;
             Debug.Log("Chat spawned for: " + tmpClient.networkPlayerName);
+
+            GameObject objectiveUISpawn = Instantiate(objectivePrefab);
+            objectiveUISpawn.GetComponent<NetworkObject>().SpawnWithOwnership(tmpClient.networkClientID);
+            Debug.Log("Objective spawned for: " + tmpClient.networkPlayerName);
+
+            GameObject timeLimitUISpawn = Instantiate(timeLimitPrefab);
+            timeLimitUISpawn.GetComponent<NetworkObject>().SpawnWithOwnership(tmpClient.networkClientID);
+            Debug.Log("Time Limit spawned for: " + tmpClient.networkPlayerName);
         }
     }
 

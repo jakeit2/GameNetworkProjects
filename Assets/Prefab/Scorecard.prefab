@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &2816316777581168916
 RectTransform:
@@ -111,10 +111,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 1985651294278666796, guid: b8f4deac54b38b54a89d5ecd7e53243d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2689332869629698301, guid: b8f4deac54b38b54a89d5ecd7e53243d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305091986435638297, guid: b8f4deac54b38b54a89d5ecd7e53243d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4480748705779769124, guid: b8f4deac54b38b54a89d5ecd7e53243d,
         type: 3}
       propertyPath: m_Text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5207315467273883684, guid: b8f4deac54b38b54a89d5ecd7e53243d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8180139462732507102, guid: b8f4deac54b38b54a89d5ecd7e53243d,
         type: 3}
@@ -220,6 +240,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232320580947778197, guid: b8f4deac54b38b54a89d5ecd7e53243d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8432833956476169349, guid: b8f4deac54b38b54a89d5ecd7e53243d,
         type: 3}

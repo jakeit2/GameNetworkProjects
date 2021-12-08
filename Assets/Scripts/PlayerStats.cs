@@ -15,21 +15,60 @@ public class PlayerStats : NetworkBehaviour
     private float damgeVal = 20f;
     public GameObject deathScreen;
     public bool playerDied = false;
+    public GameObject timerObject;
+    public Text timeCount;
+    public float timer;
+    public int waitingTime;
+    public GameObject gunObject;
+    public GameObject playerHealthBar;
     
     public NetworkVariableInt kills = new NetworkVariableInt(0);
     public NetworkVariableInt deaths = new NetworkVariableInt(0);
     // Update is called once per frame
     void Update()
     {
+        GetComponent<CharacterController>().enabled = true;
+        GetComponent<CapsuleCollider>().enabled = true;
+        GetComponent<MeshRenderer>().enabled = true;
+        GetComponent<Mp_BulletSpawner>().enabled = true;
+        gunObject.SetActive(true);
+        playerHealthBar.SetActive(true);
+        timerObject.SetActive(false);
         healthbar.value = currentHP.Value / maxHp;
         if(currentHP.Value < 0)
         {
-            RespawnPlayerServerRpc();
-            ResetPlayerClientRpc();
-            if(IsOwner)
-            {
-                Debug.Log("You died");
+            if(IsOwner){
+                timerObject.SetActive(true);
+                GetComponent<CharacterController>().enabled = false;
+                GetComponent<CapsuleCollider>().enabled = false;
+                GetComponent<MeshRenderer>().enabled = false;
+                GetComponent<Mp_BulletSpawner>().enabled = false;
+                gunObject.SetActive(false);
+                playerHealthBar.SetActive(false);
             }
+
+            else{
+                timerObject.SetActive(false);
+            }
+            
+            timer += Time.deltaTime;
+            string minutes = ((int) timer/ 60).ToString();
+            string seconds = (timer % 60).ToString("f2"); 
+            timeCount.text = minutes + "." + seconds;
+            if (timer > waitingTime)
+            {
+                timer = 0;
+                Debug.Log("Respawn");
+                timerObject.SetActive(false); 
+                RespawnPlayerServerRpc();
+                ResetPlayerClientRpc();
+                if(IsOwner)
+                {
+                    Debug.Log("You died");
+                }
+            }
+           
+            
             
             
             //playerDied = true;
@@ -66,6 +105,7 @@ public class PlayerStats : NetworkBehaviour
         {
             deaths.Value++; 
             Debug.Log("You died");
+
             //playerDied = true;
         }
     }
@@ -83,6 +123,7 @@ public class PlayerStats : NetworkBehaviour
     [ServerRpc]
     private void RespawnPlayerServerRpc()
     {
+
         currentHP.Value = maxHp;
 
     }
@@ -90,6 +131,7 @@ public class PlayerStats : NetworkBehaviour
     [ClientRpc]
     private void ResetPlayerClientRpc()
     {
+        
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
         UnityEngine.Random.InitState((int)System.DateTime.Now.Ticks);
         int index = UnityEngine.Random.Range(0, spawnPoints.Length);
