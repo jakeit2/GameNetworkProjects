@@ -12,6 +12,8 @@ public class Mp_BulletSpawner : NetworkBehaviour
     public Rigidbody bullet;
     public Transform bulletPos;
     private float bulletSpeed = 10f;
+    public AudioSource audioSource;
+    
 
     // Update is called once per frame
     void Update()
@@ -19,6 +21,7 @@ public class Mp_BulletSpawner : NetworkBehaviour
         if(Input.GetButtonDown("Fire1") && IsOwner)
         {
             FireServerRpc();
+            audioSource.Play();
         }
     }
     [ServerRpc]

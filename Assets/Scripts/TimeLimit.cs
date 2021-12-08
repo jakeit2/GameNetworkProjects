@@ -7,6 +7,7 @@ using MLAPI.Connection;
 using MLAPI.Messaging;
 using MLAPI.NetworkVariable;
 using MLAPI.NetworkVariable.Collections;
+using MLAPI.SceneManagement;
 
 public class TimeLimit : NetworkBehaviour
 {
@@ -35,6 +36,7 @@ public class TimeLimit : NetworkBehaviour
         }
 
         timeOver.SetActive(true);
+        NetworkSceneManager.SwitchScene("LobbyArea");
         Debug.Log("Time is up");
     }
 }
